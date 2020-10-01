@@ -1,0 +1,6 @@
+pt-BR:
+  pagy:
+    nav:
+      prev: "<"
+      next: ">"
+      gap: "…"
