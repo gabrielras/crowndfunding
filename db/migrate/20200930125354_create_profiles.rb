@@ -11,6 +11,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string :document_number
       t.string :bank_id
       t.string :recipient_id
+      t.references :client, null: false, foreign_key: true
       t.timestamps
     end
   end

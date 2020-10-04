@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :client
   belongs_to :category
   has_many :donations
@@ -30,5 +33,14 @@ class Project < ApplicationRecord
       errors.add(:base, 'A data de início e encerramento devem ser maiores que o momento atual.')
       raise ActiveRecord::Rollback
     end
+  end
+
+  def donation_total_value
+    self.donations.where(status: 'paid').to_a.sum { |donation| donations.price_paid }
+  end
+
+  def visibility_valid?
+    return true if start_time <= Time.current && end_time >= Time.current
+    false
   end
 end

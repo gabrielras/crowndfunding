@@ -1,13 +1,18 @@
 class Donation < ApplicationRecord
   belongs_to :client
   belongs_to :project
-  
-  before_create :donation_invalid?
 
-  def donation_invalid?
-    if project.end_time < Time.current
-      errors.add(:base, 'Não é possível realizar o pagamento, pois o prazo encerrou.')
-      raise ActiveRecord::Rollback
-    end
-  end
+  enum status: {
+    processing: 0,
+    authorized: 1,
+    paid: 2,
+    refunded: 3,
+    refused: 4,
+    chargedback: 5,
+    analyzing: 6,
+    pending_review: 7,
+    error_in_transaction: 10
+  }
+
+  
 end
