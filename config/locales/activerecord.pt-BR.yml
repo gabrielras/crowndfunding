@@ -1,0 +1,53 @@
+pt-BR:
+  activerecord:
+    models:
+      client:
+        one: Usuário
+        other: Usuários
+      profile:
+        one: Perfil 
+        other: Perfis
+      category:
+        one: Categoria
+        other: Categorias
+      project:
+        one: Projeto
+        other: Projetos
+      donation:
+        one: Doação
+        other: Doações
+    attributes:
+      client:
+        name: Nome do responsável
+        surname: Sobrenome do responsável
+        cpf_number: CPF do responsável
+        password: Senha
+        current_password: Senha Atual
+      profile:
+        bank_code: Código do Banco
+        agency: Agência
+        account: Conta
+        agency_dv: Identificador da Agência
+        account_dv: Identificador da Conta
+        account_type: Tipo de Conta
+        legal_name: Nome Legal
+        document_number: Número de Documento
+        bank_id: bank_id
+        recipient_id: recipient_id
+        client: Usuário
+      project:
+        title: Título
+        price: Preço
+        description: Descrição
+        category: Categoria
+        end_time: Data de Término
+        start_time: Data de Início
+        image: Imagem
+        client: Usuário
+      donation:
+        client: Usuário
+        project: Projeto
+        price_paid: Valor Pago
+        status: Situação
+        comment: Comentário
+        transaction_id: Id da Transação
