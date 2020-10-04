@@ -11,8 +11,10 @@ class Donation < ApplicationRecord
     chargedback: 5,
     analyzing: 6,
     pending_review: 7,
-    error_in_transaction: 10
+    error_in_transaction: 10,
+    pending: 11
   }
 
-  
+  validates :price_paid, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  validates :status, presence: true
 end

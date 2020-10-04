@@ -10,11 +10,10 @@ class Project < ApplicationRecord
 
   validates :image, presence: true
   validates :title, presence: true, length: { maximum: 64 }
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 500 }
   validates :description, presence: true, length: { maximum: 512 }
   validates :end_time, presence: true
   validates :start_time, presence: true
-  validates_length_of :price, :in => 1..500
 
   before_save :time_invalid
 
@@ -29,18 +28,18 @@ class Project < ApplicationRecord
       raise ActiveRecord::Rollback
     end
 
-    if start_time <= Time.current || end_time <= Time.current
-      errors.add(:base, 'A data de início e encerramento devem ser maiores que o momento atual.')
+    if end_time <= Time.current
+      errors.add(:base, 'A data de encerramento devem ser maiores que o momento atual.')
       raise ActiveRecord::Rollback
     end
   end
 
   def donation_total_value
-    self.donations.where(status: 'paid').to_a.sum { |donation| donations.price_paid }
+    self.donations.where(status: 'paid').to_a.sum { |donation| donation.price_paid }
   end
 
-  def visibility_valid?
-    return true if start_time <= Time.current && end_time >= Time.current
+  def unavailable
+    return true if start_time >= Time.current || end_time <= Time.current
     false
   end
 end
