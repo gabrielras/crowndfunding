@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   namespace :client do
     resources :profiles, except: [:destroy]
     resources :projects
-    resources :donations, only: [:index, :show]
+    resources :donations, only: [:index, :show, :new, :create]
   end
 
   resources :projects, only: [:index, :show]
-  resources :donations, only: [:new]
+  resources :clients, only: [:index]
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
