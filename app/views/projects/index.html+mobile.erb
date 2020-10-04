@@ -1,0 +1,60 @@
+<%= search_form_for @q , url: root_path do |f| %>
+  <div class="columns ">
+    <div class="column is-8">
+      <div class="control">
+        <%= f.search_field :title_or_category_title_cont, class:'input', placeholder: 'Pesquisar produtos' %>
+      </div>
+    </div>
+  </div>
+  <section class="columns is-fullheight">
+    <div class="column is-2 is-narrow-mobile is-fullheight">
+    <div class="tags are-medium">
+      <span class="tag is-info is-light filter-mobile-button">+ Filtros <sup class="pad-cart_count"><i class="fa fa-sort-desc" aria-hidden="true"></i></sup></span>
+      <span class="tag is-info is-light categories-mobile-button">Categorias  <sup class="pad-cart_count"><i class="fa fa-sort-desc" aria-hidden="true"></i></sup></span>
+      <%=  f.submit "Filtrar", class: 'button is-danger is-outlined is-uppercase is-small' %>
+    </div>
+      <div class="filter-mobile">
+        <ul class="menu-list is-3">
+          <li>Preço Arrecadação Mínimo</li>
+            <%= f.number_field :price_gteq, class: 'input', min: 1 %>
+          <li>Preço Arrecadação Máximo</li>
+            <%= f.number_field :price_lteq, class: 'input', min: 1 %>
+        </ul>
+      </div>
+      <div class="categories-mobile">
+        <% Category.all.each do |category| %>
+          <% if category.project_present?%>
+            <ul class="menu-list">
+              <%= link_to category.title, projects_path(@projects, q: {category_title_eq: category.title })%>
+            </ul>
+            <hr class="hr-category hr-color">
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+<% end %>
+
+<div class="column is-9">
+  <% @projects.each do |project| %>
+    <div class="columns is-mobile is-vcentered" style="padding: 0px;margin-bottom: 0px;">
+      <div class="column is-two-fifths ">
+        <%= link_to project_path(project) do %> 
+          <%= image_tag project.image_url(:default), class: 'project-image-mobile' %>
+        <% end %>
+      </div>
+      <%= link_to project_path(project) do %>
+        <div class="column">
+          <h3 class="f5"><%= truncate(project.title, length: 35) %></h3>
+           <p class="has-text-gray fg pt1">Meta: <%= number_to_currency(project.price) %></p>
+            <p class="has-text-gray fg pt1">Arrecadado: <%= number_to_currency(project.donation_total_value) %></p>       
+          <% if project.unavailable %>
+            <span class="tag is-danger">encerrado</span><br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <hr class="hr-color" style="padding: 0px; margin-top: 0px;" />
+  <% end %>
+</div>
+<%= pagy_bulma_nav(@pagy).html_safe if @projects.present? %>
+</section>
