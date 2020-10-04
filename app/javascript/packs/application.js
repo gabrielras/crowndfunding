@@ -58,6 +58,19 @@ document.addEventListener('turbolinks:load', function() {
   })
 })
 
+document.addEventListener("turbolinks:load", function() {
+
+  $(".filter-mobile-button").click(function() {
+    $(".filter-mobile").toggle();
+    $(".categories-mobile").hide();
+  });
+  $(".categories-mobile-button").click(function() {
+    $(".categories-mobile").toggle();
+    $(".filter-mobile").hide();
+  });
+
+});
+
 $(document).on('turbolinks:load', function() {
 
     function limpa_formulário_cep() {
@@ -117,4 +130,3 @@ $(document).on('turbolinks:load', function() {
         }
     });
 });
-  
