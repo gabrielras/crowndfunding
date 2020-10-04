@@ -51,3 +51,14 @@ pt-BR:
         status: Situação
         comment: Comentário
         transaction_id: Id da Transação
+        statuses:
+          processing: Processando Pagamento
+          authorized: Processando Autorizado
+          paid: Pago
+          refunded: Devolvido
+          refused: Recusado
+          chargedback: Em Disputa
+          analyzing: Analizando
+          pending_review: Em Revisão
+          error_in_transaction: Operação não concluída
+          pending: Verificando Pagamento
