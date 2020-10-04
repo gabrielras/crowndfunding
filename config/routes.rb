@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: [:index, :show]
   resources :clients, only: [:index]
+  post :get_payment_status, to: 'get_payment_status#index', controller: 'get_payment_status'
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
