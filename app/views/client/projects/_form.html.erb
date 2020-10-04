@@ -1,0 +1,94 @@
+<div class="columns">
+  <div class="column is-10 is-offset-1 is-centered">
+
+    <%= form_for [:client, @project ]  do |f| %>
+      <% if @project.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @project.errors.full_messages.each do |message| %>
+            <li class="is-danger" style="color:red"><%= message %></li>
+          <% end %>
+          </ul>
+        </div><br>
+      <% end %>
+
+        <div class="columns">
+          <div class="field column is-7">
+            <div class="control">
+              <label>Título</label>
+              <%= f.text_field :title, :required => true, class: 'input' %>
+            </div>
+          </div>
+          <div class="field column is-2">
+            <div class="control">
+              <label>Preço</label>
+              <%= f.number_field :price, :required => true, type:"number", step: 0.01, class: 'input' %>
+            </div>
+          </div>
+
+          <div class="field column is-3">
+            <div class="control">
+              <label>Categoria</label>
+              <div class="control has-icons-left">
+                <span class="select">
+                  <%=  f.collection_select(:category_id, Category.all, :id, :title, { :prompt => 'Categoria', :selected => @project.category_id }, { class: 'form-control' }) %>
+                </span>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-tag"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label>Descrição</label>
+            <%= f.text_area :description, :required => true, class: 'textarea' %>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-3"><br>
+            <div class="file is-fullwidth is-link has-name">
+              <label class="file-label">
+                <%= f.file_field :image, class: "file-input", data: { allowed_file_extensions: 'png jpeg jpg jfif' } %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fa fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Imagem
+                  </span>
+                </span>
+                <span class="file-name">
+                  <%= "arquivo salvo" if @project.image.present? %>
+                </span>
+              </label>
+            </div>
+            <p class="help">Aceitamos apenas arquivos em: *jpj *pnj *jpeg *jfif. A Imagem devem ser quadrada e possuir tamanho máximo de 4mb.</p>
+          </div>
+
+          <div class="field column is-3">
+            <div class="control">
+              <label>Data de Início</label> 
+              <%= f.datetime_local_field :start_time, :required => true, class: 'input' %>
+            </div>
+          </div>
+
+          <div class="field column is-3">
+            <div class="control">
+              <label>Data de Encerramento</label> 
+              <%= f.datetime_local_field :end_time, :required => true, class: 'input' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%=  f.submit "Salvar", class: 'button is-primary is-outlined is-fullwidth is-uppercase' %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -1,29 +1,134 @@
-<h2>Sign up</h2>
+<section class="container">
+  <div class="columns is-multiline">
+    <div class="column is-10 is-offset-1 register box">
+      <div class="columns is-centered is-vcentered">
+        <div class="column right has-text-centered">
+          <h1 class="subtitle is-4">Cadastre</h1>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "clients/shared/error_messages", resource: resource %>
+            <div class="field">
+              <div class="control">
+                <%= f.label :name, "Nome" %>
+                <%= f.text_field :name, :required => true, class: "input" %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.label :surname, "Sobrenome" %>
+                <%= f.text_field :surname, :required => true, class: "input" %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.label :cpf_number, "CPF do Representante" %>
+                <%= f.text_field :cpf_number, :required => true, class: "input" %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.label :email %>
+                <%= f.email_field :email, :required => true, autocomplete: "email", class: "input" %>
+              </div>
+            </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "clients/shared/error_messages", resource: resource %>
+            <div class="field">
+              <div class="control">
+                <%= f.label :password, "Senha" %>
+                <%= f.password_field :password, :required => true, autocomplete: "current-password", class: "input" %>
+              </div>
+            </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="actions">
+              <%= f.submit "Confirmar", class: "button is-danger is-outlined is-fullwidth is-uppercase" %>
+            </div>
+          <% end %>
+          <br>
+          <div class="has-text-centered">
+            <%= render 'clients/shared/links' %>
+          </div>
+        </div>
+        <div class="column left">
+          <h1 class="title is-2">Quais as vantagens?</h1>
+          <p>Acompanhe seu projeto ou o projeto que você apoia.</p><br>
+          <p>Pagamento simples e sem burocrácia.</p><br>
+          <p>Ajude pessoas a criarem uma melhor comunidade.</p>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
+<style>
+  :root {
+    --brandColor: hsl(166, 67%, 51%);
+    --background: rgb(247, 247, 247);
+    --textDark: hsla(0, 0%, 0%, 0.66);
+    --textLight: hsla(0, 0%, 0%, 0.33);
+  }
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+  .field:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  .register {
+    margin-top: 1rem;
+    background: white;
+    border-radius: 10px;
+  }
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+  .left,
+  .right {
+    padding: 3.5rem;
+  }
 
-<%= render "clients/shared/links" %>
+  .left {
+    border-right: 5px solid var(--background);
+  }
+
+  .left .title {
+    font-weight: 700;
+    letter-spacing: -2px;
+  }
+
+  .left .colored {
+    color: var(--brandColor);
+    font-weight: 500;
+    margin-top: 1rem !important;
+    letter-spacing: -1px;
+  }
+
+  .left p {
+    font-size: 1.15rem;
+  }
+
+  .right .title {
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  .right .description {
+    margin-top: 1rem;
+    margin-bottom: 1rem !important;
+    color: var(--textLight);
+    font-size: 1.15rem;
+  }
+
+  .right small {
+    color: var(--textLight);
+  }
+
+  input {
+    font-size: 1rem;
+  }
+
+  input:focus {
+    border-color: var(--brandColor) !important;
+    box-shadow: 0 0 0 1px var(--brandColor) !important;
+  }
+
+  .fab,
+  .fas {
+    color: var(--textLight);
+    margin-right: 1rem;
+  }
+
+</style>

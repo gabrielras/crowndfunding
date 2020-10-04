@@ -1,0 +1,23 @@
+<div class="columns is-multiline is-centered">
+  <div class="column is-10 is-offset-2">
+    <% if @donations.blank? %>
+      <p>Você ainda não realizou nenhum apoio :(</p>
+    <% else %>
+      <% @donations.each do |donation| %>
+        <div class="columns" style="padding: 0px;margin-bottom: 0px;">   
+          <div class="column is-5 box is-offset-2">
+            <p class="f4"><%=  donation.project.title %></p>
+            <p>Situação: <%=  Donation.human_enum_name(:status, donation.status) %></p>
+            <p>Doação de: <%= number_to_currency(donation.price_paid) %></p>
+            <p>Comentário: <%= donation.comment %></p>
+            <%= link_to "Acessar", project_path(donation.project), class: 'button is-primary is-outlined is-small is-uppercase' %>
+          </div>
+          <hr class="hr-color" style="padding: 0px; margin-top: 0px;" />
+        </div>
+      <% end %>
+      <div class="column is-5 is-offset-2">
+        <%= pagy_bulma_nav(@pagy).html_safe %>
+      </div>
+    <% end %>
+  </div>
+</div>

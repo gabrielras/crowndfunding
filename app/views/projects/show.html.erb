@@ -1,0 +1,48 @@
+<section class="section container project-show">
+  <div class="columns">
+    <div class="column is-6">
+      <div class="pad-slideshow">
+        <div class="columns">
+           <%= image_tag @project.image_url(:default), class: 'project-image' %>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="column is-6">
+      <div class="box pa4">
+        <h1 class="subtitle is-5 has-text-left" style="margin-bottom: 0px;"><%= @project.title %></h4><br>
+        <p class="has-text-left">Meta de Arrecadação: <%= number_to_currency(@project.price) %> <br> Total Arrecado: <%= number_to_currency(@project.donation_total_value) %></h4>
+        <br><br>
+        <% if @project.unavailable %>
+          <%= link_to 'Encerrado', projects_path , class: 'button is-danger is-uppercase is-outlined add-to-order' %>
+        <% else %>
+          <%= link_to 'Apoiar', new_client_donation_path(project_id: @project.id), class: 'button is-info is-uppercase is-outlined add-to-order' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column is-6">
+    <div class="content pa3 bg-white border-radius-3">
+      <h2 class="subtitle is-4">Descrição</h4>
+      <p stytle="text-align: justify;"><%= @project.description.gsub(/\n/, '<br/>').html_safe  %></p>
+      <h3 class="subtitle is-5">Apoiadores</h4>
+      <% if @donations.present? %>
+        <% @donations.each do |donation|%>
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong><%= donation.client.name %> <%= donation.client.surname %></strong>
+                  <br>
+                  <%= donation.comment %>
+                </p>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      <% else %>
+        <p>Seja o primeiro :)</p>
+      <% end %>
+    </div>
+  </div>
+</section>

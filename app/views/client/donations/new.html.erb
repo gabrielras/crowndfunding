@@ -1,0 +1,68 @@
+<div class="column is-6 is-offset-3">
+  <h1 class="subtitle has-text-centered">
+    Dados da Pagamento
+  </h1>
+  <h2 class="subtitle is-6">Projeto: <%= @project.title %></h2>
+  <%= form_for :paymnet_info, url: client_donations_path, method: :post do |f| %>
+    <div class="field">
+      <div class="control">
+        <%= f.text_area :comment, placeholder:'Comentário', autofocus: true, class: 'textarea' %>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <%= f.number_field :price, placeholder:'Valor da Doação', :required => true, class: 'input' %>
+      </div>
+    </div>
+    <h2 class="subtitle is-6">Dados do Cartão de Crédito</h2>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= f.text_field :card_holder_name, placeholder:'Nome', :required => true, class: 'input' %>
+        <span class="icon is-small is-left">
+          <i class="fa fa-user"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= f.text_field :cpf_number, placeholder:'CPF', :required => true, class: 'input' %>
+        <span class="icon is-small is-left">
+          <i class="fa fa-user"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= f.text_field :phone_number, placeholder: '(99)99999-9999', :required => true, class: 'input' %>
+        <span class="icon is-small is-left">
+          <i class="fa fa-phone"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field"> 
+      <div class="control has-icons-left has-icons-right">
+        <%= f.text_field :card_number, placeholder:'Número do Cartão', :required => true, class: "input"  %>
+        <span class="icon is-small is-left">
+          <i class="fa fa-credit-card"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-body">
+        <div class="field">
+          <%= f.text_field :card_expiration_date, placeholder:'Data de Expiração', :required => true, class: "input" %>
+        </div>
+        <div class="control has-icons-left has-icons-right">
+          <%= f.text_field :card_cvv, placeholder:'CVV', :required => true, class: 'input' %>
+          <span class="icon is-small is-left">
+            <i class="fa fa-credit-card"></i>
+          </span>  
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :project_id, value: @project.id %>
+    <div class="actions">
+      <%= f.submit "Realizar Contribuição", class: "button is-info is-rounded is-outlined is-fullwidth is-uppercase" %>
+    </div>
+  <% end %>
+</div>
