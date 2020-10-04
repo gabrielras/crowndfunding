@@ -1,6 +1,6 @@
 class Client::ProjectsController < ClientsController
   include EnabledClient
-  before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :set_project, only: [:edit, :update, :show, :destroy]
 
   # GET /projects
   # GET /projects.json
@@ -8,7 +8,7 @@ class Client::ProjectsController < ClientsController
     @q = Project.search(params[:q])
     @projects = @q.result.where(:client_id => current_client.id)
                           .order('created_at DESC')
-    @pagy, @projects = pagy(@projects, page: params[:page], items: 20)
+    @pagy, @projects = pagy(@projects, page: params[:page], items: 8)
   end
   
   # GET /projects/new
@@ -17,6 +17,10 @@ class Client::ProjectsController < ClientsController
     @project = current_client.projects.build
   end
   
+  def show
+    redirect_to edit_client_project_path(@project)
+  end
+
   # GET /projects/1/edit
   def edit
   end
@@ -28,17 +32,17 @@ class Client::ProjectsController < ClientsController
     if @project.save
       redirect_to edit_client_project_path(@project), notice: 'Projeto criado com sucesso.'
     else
-      render :new, alert: 'Projeto não foi criado, tente novamente.'
+      render :new
     end
   end
   
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    if @project.update_attributes(visibility: project_params[:visibility], quantity: project_params[:quantity])
+    if @project.update(project_params)
       redirect_to edit_client_project_path(@project), notice: 'Projeto atualizado com sucesso.'
     else
-      render edit_client_project_path(@project), alert: 'Projeto não atualizado.'
+      render :edit
     end
   end
 
@@ -64,6 +68,6 @@ class Client::ProjectsController < ClientsController
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params 
     params.require(:project).permit(:category_id, :title, :price, :description,
-      :image, :end_time, :start_time)
+      :image, :end_time, :start_time).merge(client_id: current_client.id)
   end
 end

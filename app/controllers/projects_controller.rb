@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @donations = Donation.where(project_id: @project.id, status: 'paid')
   end
   
   private

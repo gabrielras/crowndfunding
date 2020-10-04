@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
+  protect_from_forgery prepend: true, with: :exception
   before_action :detect_mobile
 
   private

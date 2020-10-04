@@ -69,7 +69,7 @@ class Client::ProfilesController < ClientsController
 
     def authorized_profile
       if current_client.id != @profile.client.id
-        redirect_to new_client_profile_path, notice: 'Você não está autorizado a editar esse Perfil.'
+        redirect_to new_client_profile_path, alert: 'Você não está autorizado a editar esse Perfil.'
       end
     end
 
