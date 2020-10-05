@@ -2,6 +2,10 @@ module DonationHelper
   include Pagy::Frontend
 
   def info_error(payment_info)
+    if Project.find(params[:paymnet_info][:project_id].to_i).unavailable
+      return 'O projeto não está mais disponível.'
+    end
+
     if [3,4].exclude? payment_info[:card_cvv].length
       return 'O número de CVV está errado.' 
     end
