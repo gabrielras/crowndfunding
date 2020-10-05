@@ -37,10 +37,10 @@ pt-BR:
         client: Usuário
       project:
         title: Título
-        price: Preço
+        price: Meta de Arrecadação
         description: Descrição
         category: Categoria
-        end_time: Data de Término
+        end_time: Data de Encerramento
         start_time: Data de Início
         image: Imagem
         client: Usuário
