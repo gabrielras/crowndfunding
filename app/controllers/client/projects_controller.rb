@@ -48,7 +48,7 @@ class Client::ProjectsController < ClientsController
 
   def destroy
     @project.destroy
-    redirect_to client_project_path, notice: 'Seu projeto foi excluído.'
+    redirect_to client_projects_path, notice: 'Seu projeto foi excluído.'
   end
   
   private
