@@ -34,6 +34,7 @@
     <div class="field">
       <div class="control has-icons-left has-icons-right">
         <%= f.text_field :phone_number, placeholder: '(99)99999-9999', :required => true, class: 'input' %>
+        <p class="help">ex: (99)99999-9999</p>
         <span class="icon is-small is-left">
           <i class="fa fa-phone"></i>
         </span>
@@ -51,6 +52,7 @@
       <div class="field-body">
         <div class="field">
           <%= f.text_field :card_expiration_date, placeholder:'Data de Expiração', :required => true, class: "input" %>
+          <p class="help">ex: 20/20</p>
         </div>
         <div class="control has-icons-left has-icons-right">
           <%= f.text_field :card_cvv, placeholder:'CVV', :required => true, class: 'input' %>
