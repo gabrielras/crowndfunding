@@ -9,7 +9,11 @@
         <li>Preço Arrecadação Mínimo</li>
           <%= f.number_field :price_gteq, class: 'input', min: 1 %>
         <li>Preço Arrecadação Máximo</li>
-          <%= f.number_field :price_lteq, class: 'input', min: 1 %>  
+          <%= f.number_field :price_lteq, class: 'input', min: 1 %> 
+        <li>Data de inícil mínima</li>
+          <%= f.date_field :start_time_gteq, class:'input' %>
+        <li>Data de encerramento máxima</li>
+          <%= f.date_field :end_time_lteq, class:'input' %>
       </ul>  
       <p class="menu-label">
         Categorias
@@ -26,20 +30,6 @@
   </div>
 <div class="column is-10"> 
   <div class="columns">
-    <div class="column is-2">
-      <div class="field has-addons">
-        <p class="control">
-          <%= f.date_field :start_time_gteq, class:'input' %>
-        </p>
-      </div>
-    </div>
-     <div class="column is-2">
-      <div class="field has-addons">
-        <p class="control">
-          <%= f.date_field :end_time_lteq, class:'input' %>
-        </p>
-      </div>
-    </div>
     <div class="column is-4">
       <%= f.search_field :title_or_category_title_cont, class:'input', placeholder: 'Pesquisar' %>
     </div>

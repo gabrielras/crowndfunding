@@ -11,7 +11,11 @@
     <div class="column is-6">
       <div class="box pa4">
         <h1 class="subtitle is-5 has-text-left" style="margin-bottom: 0px;"><%= @project.title %></h4><br>
-        <p class="has-text-left">Meta de Arrecadação: <%= number_to_currency(@project.price) %> <br> Total Arrecado: <%= number_to_currency(@project.donation_total_value) %></h4>
+        <p class="has-text-left">
+          Meta de Arrecadação: <%= number_to_currency(@project.price) %> <br> 
+          Total Arrecado: <%= number_to_currency(@project.donation_total_value) %> <br>
+          Data de encerramento: <%= @project.end_time.strftime("%d/%m/%Y, %H:%M h") %>
+        </p>
         <br><br>
         <% if @project.unavailable %>
           <%= link_to 'Encerrado', projects_path , class: 'button is-danger is-uppercase is-outlined add-to-order' %>
