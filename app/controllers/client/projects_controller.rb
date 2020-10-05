@@ -7,7 +7,11 @@ class Client::ProjectsController < ClientsController
   def index
     @q = Project.search(params[:q])
     @projects = @q.result.where(:client_id => current_client.id)
-                          .order('created_at DESC')
+    if params[:filter].present?
+      @projects = @projects.order("end_time #{params[:filter][:data]}") if params[:filter][:data].present?
+      @projects = @projects.order("title #{params[:filter][:title]}") if params[:filter][:title].present?
+      @projects = @projects.order("price #{params[:filter][:price]}") if params[:filter][:price].present?
+    end
     @pagy, @projects = pagy(@projects, page: params[:page], items: 8)
   end
   
