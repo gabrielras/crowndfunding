@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este é um mvp de uma plataforma de crowdfunding
 
-Things you may want to cover:
+Primeiro, é necessário criar um arquivo .env na raiz da aplicação.
 
-* Ruby version
+Adicione as senguintes chaves privadas:
 
-* System dependencies
+PAGARME_API_KEY
+PAGARME_ENCRYPTION_KEY
+AWS_FOG_DIRECTORY
+AWS_KEY_ID
+AWS_SECRET_KEY
 
-* Configuration
+#Caso esteja utilizando localmente, recomendo a utilização do ngrok.
+Após isso, acesse o arquivo: app/services/pagarme/create_transaction_service.rb
+e realize sua substituíção do seu postback_url personalizado.
 
-* Database creation
+Após isso:
+ rails db: create
+ rails db: migrate
+ rails db: seed
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
