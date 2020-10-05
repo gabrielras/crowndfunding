@@ -35,7 +35,7 @@
             <p>Meta: <%= number_to_currency(project.price) %></p>
             <p>Arrecadado: <%= number_to_currency(project.donation_total_value) %></p>
             <%= link_to "Editar", edit_client_project_path(project), class: 'button is-info is-outlined is-small is-uppercase' %>
-            <%= link_to "Excluir", client_project_path(project), metohod: :delete, data: {confirm:"Você tem certeza que deseja excluir?"}, class: 'button is-danger is-outlined is-small is-uppercase' %>
+            <%= link_to "Excluir", client_project_path(project), method: :delete, data: {confirm:"Você tem certeza que deseja excluir?"}, class: 'button is-danger is-outlined is-small is-uppercase' %>
           </div>
           <hr class="hr-color" style="padding: 0px; margin-top: 0px;" />
         </div>
