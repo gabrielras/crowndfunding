@@ -1,4 +1,4 @@
-<%= search_form_for @q , url: root_path do |f| %>
+<%= search_form_for @q , url: projects_path do |f| %>
   <div class="columns ">
     <div class="column is-8">
       <div class="control">
@@ -19,6 +19,10 @@
             <%= f.number_field :price_gteq, class: 'input', min: 1 %>
           <li>Preço Arrecadação Máximo</li>
             <%= f.number_field :price_lteq, class: 'input', min: 1 %>
+          <li>Data de inícil miníma.</li>
+            <%= f.date_field :start_time_gteq, class:'input' %>
+          <li>Data de encerramento maxíma</li>
+            <%= f.date_field :end_time_lteq, class:'input' %>
         </ul>
       </div>
       <div class="categories-mobile">
