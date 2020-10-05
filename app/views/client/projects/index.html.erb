@@ -1,60 +1,23 @@
 
 <section class="columns is-fullheight">
-<div class="column is-2 is-narrow-mobile is-fullheight is-hidden-mobile	">
-  <%=  form_for :filter , url: client_projects_path, method: :get do |f| %>
+<div class="column is-2 is-narrow-mobile is-fullheight">
+  <%=  search_form_for @q , url: client_projects_path, method: :get do |f|%>
     <aside class="menu">
       <p class="menu-label">
         Filtros
       </p>
       <ul class="menu-list is-3">
-        <p>Título<p>
-        <p class="control">
-          <span>
-            <div class="select"><%= f.select :title, options_for_select([
-              [ 'Selecione', '' ],
-              [ 'Crescente', 'ASC' ],
-              [ 'Descrescente', 'DESC' ]
-            ]) , class: 'input' %>
-            </div>
-          </span> 
-        </p><br>
-        <p>Data de Encerramento<p>
-        <p class="control">
-          <span>
-            <div class="select"><%= f.select :data, options_for_select([
-              [ 'Selecione', '' ],
-              [ 'Crescente', 'ASC' ],
-              [ 'Descrescente', 'DESC' ]
-            ]) , class: 'input' %>
-            </div>
-          </span> 
-        </p><br>
-        <p>Preço de Arrecadação<p>
-        <p class="control">
-          <span>
-            <div class="select"><%= f.select :price, options_for_select([
-              [ 'Selecione', '' ],
-              [ 'Crescente', 'ASC' ],
-              [ 'Descrescente', 'DESC' ]
-            ]) , class: 'input' %>
-            </div>
-          </span> 
-        </p>
-        <div class="column is-2"><br>
-        <%= button_tag class: "button is-danger" do %>
-          Aplicar
-        <% end %>
-      </div>
+        <%= sort_link(@q, :title, default_order: :asc) %>
+        <%= sort_link(@q, :end_time, default_order: :asc) %>
+        <%= sort_link(@q, :price, default_order: :asc) %>
       </ul>
     </aside>
-  <% end %>
 </div>
 <div class="column is-10 is-offset-1">
   <div class="columns">
     <div class="column is-7">
       <div class="columns is-mobile">
         <div class="column">
-        <%=  search_form_for @q , url: client_projects_path, method: :get do |f|%>
           <div class="control">
             <%= f.search_field :title_cont, class: 'input is-rounded', placeholder: 'Pesquisar por título' %>
           </div>

@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   def index
     @q = Project.ransack(params[:q])
     @projects = @q.result.includes(:client, :category)
+                         .where('start_time <= ?', Time.current)
     @pagy, @projects = pagy(@projects, page: params[:page], items: 20)
   end
 

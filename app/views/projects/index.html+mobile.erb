@@ -19,11 +19,15 @@
             <%= f.number_field :price_gteq, class: 'input', min: 1 %>
           <li>Preço Arrecadação Máximo</li>
             <%= f.number_field :price_lteq, class: 'input', min: 1 %>
-          <li>Data de inícil mínima</li>
-            <%= f.date_field :start_time_gteq, class:'input' %>
-          <li>Data de encerramento máxima</li>
-            <%= f.date_field :end_time_lteq, class:'input' %>
         </ul>
+        <p class="menu-label">
+          Ordenar
+        </p>
+        <ul class="menu-list is-3">
+          <%= sort_link(@q, :title, default_order: :asc) %>
+          <%= sort_link(@q, :end_time, default_order: :asc) %>
+          <%= sort_link(@q, :price, default_order: :asc) %>
+        </ul>  
       </div>
       <div class="categories-mobile">
         <% Category.all.each do |category| %>
@@ -52,7 +56,7 @@
            <p class="has-text-gray fg pt1">Meta: <%= number_to_currency(project.price) %></p>
             <p class="has-text-gray fg pt1">Arrecadado: <%= number_to_currency(project.donation_total_value) %></p>       
           <% if project.unavailable %>
-            <span class="tag is-danger">encerrado</span><br>
+            <span class="tag is-danger">indisponível</span><br>
           <% end %>
         </div>
       <% end %>

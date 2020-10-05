@@ -18,7 +18,7 @@
         </p>
         <br><br>
         <% if @project.unavailable %>
-          <%= link_to 'Encerrado', projects_path , class: 'button is-danger is-uppercase is-outlined add-to-order' %>
+          <%= link_to 'Indisponível', projects_path , class: 'button is-danger is-uppercase is-outlined add-to-order' %>
         <% else %>
           <%= link_to 'Apoiar', new_client_donation_path(project_id: @project.id), class: 'button is-info is-uppercase is-outlined add-to-order' %>
         <% end %>
