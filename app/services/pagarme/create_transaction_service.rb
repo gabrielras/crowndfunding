@@ -17,7 +17,7 @@ class Pagarme::CreateTransactionService
       card_holder_name: @paymnet_info[:card_holder_name],
       card_expiration_date: @paymnet_info[:card_expiration_date].gsub(/[^0-9]/, ''),
       card_cvv: @paymnet_info[:card_cvv].gsub(/[^0-9]/, ''),
-      postback_url: "https://5298326e5b10.ngrok.io/get_payment_status",
+      postback_url: "https://mvpcrowndfunding.herokuapp.com/get_payment_status",
       capture: true,
       installments: "1",
       customer: {
