@@ -21,8 +21,12 @@ class Client::ProfilesController < ClientsController
   # POST /profile.json
   def create
     @profile = Profile.new(profile_params)
-    if @profile.save 
-      response_bank = Pagarme::CreateBankAccountService.new(profile: @profile).call
+    if @profile.save
+      begin
+        response_bank = Pagarme::CreateBankAccountService.new(profile: @profile).call
+      rescue
+        return redirect_to new_client_profile_path, notice: 'Houve um problema para salvar o perfil.'
+      end
       if response_bank.id.present?
         @profile.update(bank_id: response_bank.id)
         response_recipient = Pagarme::CreateRecipientService.new(profile: @profile).call
@@ -41,10 +45,14 @@ class Client::ProfilesController < ClientsController
   # PATCH/PUT /profile/1.json
   def update
     if @profile.update_attributes(profile_params)
-      response_bank = Pagarme::CreateBankAccountService.new(profile: @profile).call
+      begin
+        response_bank = Pagarme::CreateBankAccountService.new(profile: @profile).call
+      rescue
+        return redirect_to new_client_profile_path, notice: 'Houve um problema para salvar o perfil.'
+      end
       if response_bank.id.present?
         @profile.reload.update(bank_id: response_bank.id)
-        if @profile.recipient_id.present?
+        if @profile.recipient_id.blank?
           response_recipient = Pagarme::CreateRecipientService.new(profile: @profile).call
         else
           response_recipient = Pagarme::UpdateRecipientService.new(profile: @profile).call
