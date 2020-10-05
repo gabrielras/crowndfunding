@@ -13,7 +13,7 @@ class Client::ProjectsController < ClientsController
   
   # GET /projects/new
   def new
-    return redirect_to new_client_profile_path, notice: 'Conclua seu Perfil.' unless profile_is_complete?(current_client)
+    return redirect_to new_client_profile_path, alert: 'Atualize seu Perfil.' unless profile_is_complete?(current_client)
     @project = current_client.projects.build
   end
   

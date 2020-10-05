@@ -65,10 +65,11 @@ class Pagarme::CreateTransactionService
         }
       ]
     })
-    
+    begin
       transaction.charge
       @donation.update(transaction_id: transaction.id, status: transaction.status)
-
+    rescue
+      @donation.update(status: 'error_in_transaction')
     end
   end
 end
