@@ -4,7 +4,7 @@ class Project < ApplicationRecord
 
   belongs_to :client
   belongs_to :category
-  has_many :donations
+  has_many :donations, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 
